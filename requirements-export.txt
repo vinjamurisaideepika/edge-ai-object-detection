@@ -1,0 +1,8 @@
+# Only on your Mac, to export/quantize/evaluate models (NOT needed on the device)
+-r requirements.txt
+ultralytics
+onnx
+onnxslim
+litert-torch        # only for --tflite export
+pytest
+matplotlib

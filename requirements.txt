@@ -1,0 +1,5 @@
+# Runtime: everything the pipeline needs on the edge device / in Docker
+numpy
+opencv-python-headless
+onnxruntime
+ai-edge-litert      # TensorFlow Lite runtime (Google's new name for tflite-runtime)

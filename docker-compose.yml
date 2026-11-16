@@ -1,0 +1,28 @@
+# Edge-device emulation profiles.
+#
+#   docker compose run --rm pi4  benchmark --models models/*.onnx models/*.tflite --source samples
+#   docker compose run --rm tiny benchmark --models models/yolo11n_320_int8.tflite --source samples
+#
+# Limits make the container behave like a small board: few cores, little RAM.
+# NOTE: an Apple M-series core is still ~2-4x faster than a Pi's Cortex-A76,
+# so absolute numbers are optimistic. Compare models RELATIVE to each other.
+x-edge: &edge
+  build:
+    context: .
+    dockerfile: docker/Dockerfile
+  platform: linux/arm64
+  image: edgevision:arm64
+  volumes:
+    - ./models:/app/models:ro
+    - ./results:/app/results
+    - ./samples:/app/samples:ro
+
+services:
+  pi4:            # Raspberry Pi 4/5 class: 4 cores, 4 GB RAM
+    <<: *edge
+    cpus: 4
+    mem_limit: 4g
+  tiny:           # very constrained edge box: 1 core, 1 GB RAM
+    <<: *edge
+    cpus: 1
+    mem_limit: 1g

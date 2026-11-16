@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+# model weights and exports are generated, not committed (see README)
+*.pt
+models/*.onnx
+models/*.tflite
+*_saved_model/
+calib/
+datasets/
+results/detect/
+.DS_Store
